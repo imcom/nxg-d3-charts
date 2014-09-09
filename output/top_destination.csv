@@ -1,0 +1,160 @@
+count,date,source,name,id
+0,201301,CN,China,156
+0,201302,CN,China,156
+0,201303,CN,China,156
+1,201304,RU,Russian Federation,643
+0,201305,CN,China,156
+1410,201306,US,United States of America,840
+280,201306,CN,China,156
+110,201306,FR,France,250
+64,201306,GB,United Kingdom of Great Britain & Northern Ireland,156
+63,201306,BR,Brazil,76
+42,201306,IL,Israel,376
+25,201306,HK,Hong Kong,156
+24,201306,DE,Germany,276
+19,201306,KR,Korea,410
+17,201306,RU,Russian Federation,643
+2574,201307,US,United States of America,840
+1014,201307,CN,China,156
+134,201307,FR,France,250
+106,201307,GB,United Kingdom of Great Britain & Northern Ireland,156
+100,201307,BR,Brazil,76
+48,201307,IL,Israel,376
+40,201307,KR,Korea,410
+28,201307,SG,Singapore,156
+28,201307,HK,Hong Kong,156
+26,201307,AE,United Arab Emirates,784
+3609,201308,US,United States of America,840
+1748,201308,CN,China,156
+155,201308,GB,United Kingdom of Great Britain & Northern Ireland,156
+152,201308,BR,Brazil,76
+151,201308,FR,France,250
+79,201308,RU,Russian Federation,643
+58,201308,IL,Israel,376
+50,201308,KR,Korea,410
+35,201308,DE,Germany,276
+31,201308,RO,Romania,642
+4510,201309,US,United States of America,840
+1994,201309,CN,China,156
+257,201309,BR,Brazil,76
+198,201309,GB,United Kingdom of Great Britain & Northern Ireland,156
+176,201309,FR,France,250
+103,201309,IL,Israel,376
+82,201309,RU,Russian Federation,643
+64,201309,KR,Korea,410
+56,201309,SE,Sweden,752
+48,201309,DE,Germany,276
+5270,201310,US,United States of America,840
+2193,201310,CN,China,156
+368,201310,BR,Brazil,76
+322,201310,FR,France,250
+237,201310,GB,United Kingdom of Great Britain & Northern Ireland,156
+110,201310,IL,Israel,376
+105,201310,RU,Russian Federation,643
+94,201310,PH,Philippines,608
+86,201310,RO,Romania,642
+85,201310,SG,Singapore,156
+6132,201311,US,United States of America,840
+2437,201311,CN,China,156
+508,201311,FR,France,250
+415,201311,BR,Brazil,76
+325,201311,RO,Romania,642
+269,201311,GB,United Kingdom of Great Britain & Northern Ireland,156
+143,201311,RU,Russian Federation,643
+117,201311,SG,Singapore,156
+111,201311,IL,Israel,376
+102,201311,DE,Germany,276
+7065,201312,US,United States of America,840
+3002,201312,CN,China,156
+722,201312,FR,France,250
+645,201312,RO,Romania,642
+476,201312,BR,Brazil,76
+326,201312,GB,United Kingdom of Great Britain & Northern Ireland,156
+154,201312,RU,Russian Federation,643
+146,201312,SE,Sweden,752
+142,201312,DE,Germany,276
+120,201312,NL,Netherlands,528
+8167,201401,US,United States of America,840
+3614,201401,CN,China,156
+1047,201401,FR,France,250
+718,201401,RO,Romania,642
+549,201401,BR,Brazil,76
+367,201401,GB,United Kingdom of Great Britain & Northern Ireland,156
+187,201401,DE,Germany,276
+183,201401,RU,Russian Federation,643
+167,201401,SE,Sweden,752
+141,201401,SG,Singapore,156
+8895,201402,US,United States of America,840
+4257,201402,CN,China,156
+1239,201402,FR,France,250
+735,201402,RO,Romania,642
+619,201402,BR,Brazil,76
+427,201402,GB,United Kingdom of Great Britain & Northern Ireland,156
+215,201402,RU,Russian Federation,643
+212,201402,DE,Germany,276
+207,201402,SE,Sweden,752
+150,201402,CA,Canada,124
+9254,201403,US,United States of America,840
+4805,201403,CN,China,156
+1309,201403,FR,France,250
+760,201403,RO,Romania,642
+667,201403,BR,Brazil,76
+519,201403,GB,United Kingdom of Great Britain & Northern Ireland,156
+260,201403,RU,Russian Federation,643
+243,201403,DE,Germany,276
+214,201403,SE,Sweden,752
+192,201403,CA,Canada,124
+9618,201404,US,United States of America,840
+4921,201404,CN,China,156
+1541,201404,PL,Poland,616
+1362,201404,FR,France,250
+770,201404,RO,Romania,642
+759,201404,BR,Brazil,76
+595,201404,GB,United Kingdom of Great Britain & Northern Ireland,156
+437,201404,PE,Peru,604
+285,201404,RU,Russian Federation,643
+260,201404,DE,Germany,276
+10134,201405,US,United States of America,840
+4954,201405,CN,China,156
+3010,201405,PL,Poland,616
+1383,201405,FR,France,250
+851,201405,RO,Romania,642
+816,201405,BR,Brazil,76
+711,201405,GB,United Kingdom of Great Britain & Northern Ireland,156
+683,201405,PE,Peru,604
+289,201405,RU,Russian Federation,643
+272,201405,DE,Germany,276
+10609,201406,US,United States of America,840
+5080,201406,CN,China,156
+3042,201406,PL,Poland,616
+1416,201406,FR,France,250
+930,201406,PE,Peru,604
+882,201406,RO,Romania,642
+851,201406,BR,Brazil,76
+800,201406,GB,United Kingdom of Great Britain & Northern Ireland,156
+309,201406,DE,Germany,276
+294,201406,RU,Russian Federation,643
+10988,201407,US,United States of America,840
+5263,201407,CN,China,156
+3043,201407,PL,Poland,616
+1438,201407,FR,France,250
+1117,201407,PE,Peru,604
+1043,201407,GB,United Kingdom of Great Britain & Northern Ireland,156
+911,201407,BR,Brazil,76
+889,201407,RO,Romania,642
+333,201407,CA,Canada,124
+322,201407,DE,Germany,276
+11773,201408,US,United States of America,840
+5559,201408,CN,China,156
+3057,201408,PL,Poland,616
+1464,201408,FR,France,250
+1383,201408,PE,Peru,604
+1132,201408,GB,United Kingdom of Great Britain & Northern Ireland,156
+956,201408,BR,Brazil,76
+896,201408,RO,Romania,642
+381,201408,CA,Canada,124
+364,201408,DE,Germany,276
+0,201409,CN,China,156
+0,201410,CN,China,156
+0,201411,CN,China,156
+0,201412,CN,China,156

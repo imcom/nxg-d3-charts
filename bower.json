@@ -1,0 +1,23 @@
+{
+  "name": "nxg-globe-threat",
+  "version": "0.0.0",
+  "authors": [
+    "Imcom Jin <jinyu.bjut@gmail.com>"
+  ],
+  "description": "DDoS threats presented on globes",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "ddos"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "d3": "~3.4.11",
+    "topojson": "~1.6.18",
+    "queue-async": "~1.0.7",
+    "jquery": "~2.1.1",
+    "underscore": "~1.7.0"
+  }
+}

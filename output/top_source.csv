@@ -1,0 +1,160 @@
+count,date,source,name,id
+0,201301,CN,China,156
+0,201302,CN,China,156
+0,201303,cn,China,156
+1,201304,US,United States of America,840
+0,201305,cn,China,156
+959,201306,US,United States of America,840
+717,201306,CN,China,156
+159,201306,DE,Germany,276
+60,201306,BR,Brazil,76
+50,201306,FR,France,250
+42,201306,NL,Netherlands,528
+30,201306,KR,Korea,410
+27,201306,RU,Russian Federation,643
+11,201306,AU,Australia,36
+9,201306,RO,Romania,642
+1710,201307,CN,China,156
+1567,201307,US,United States of America,840
+246,201307,DE,Germany,276
+214,201307,NL,Netherlands,528
+101,201307,BR,Brazil,76
+66,201307,FR,France,250
+61,201307,VN,Vietnam,156
+58,201307,KR,Korea,410
+37,201307,RU,Russian Federation,643
+26,201307,CA,Canada,124
+2303,201308,CN,China,156
+2278,201308,US,United States of America,840
+549,201308,NL,Netherlands,528
+340,201308,DE,Germany,276
+144,201308,BR,Brazil,76
+136,201308,AU,Australia,36
+85,201308,FR,France,250
+78,201308,KR,Korea,410
+72,201308,VN,Vietnam,156
+49,201308,RU,Russian Federation,643
+2854,201309,CN,China,156
+2812,201309,US,United States of America,840
+649,201309,NL,Netherlands,528
+443,201309,DE,Germany,276
+186,201309,BR,Brazil,76
+168,201309,AU,Australia,36
+118,201309,KR,Korea,410
+105,201309,FR,France,250
+84,201309,VN,Vietnam,156
+69,201309,RU,Russian Federation,643
+3451,201310,CN,China,156
+3358,201310,US,United States of America,840
+710,201310,NL,Netherlands,528
+493,201310,DE,Germany,276
+242,201310,BR,Brazil,76
+176,201310,AU,Australia,36
+174,201310,KR,Korea,410
+131,201310,FR,France,250
+100,201310,RU,Russian Federation,643
+90,201310,VN,Vietnam,156
+4131,201311,US,United States of America,840
+3878,201311,CN,China,156
+737,201311,NL,Netherlands,528
+660,201311,DE,Germany,276
+302,201311,BR,Brazil,76
+220,201311,KR,Korea,410
+199,201311,FR,France,250
+181,201311,AU,Australia,36
+170,201311,RU,Russian Federation,643
+122,201311,GB,United Kingdom of Great Britain & Northern Ireland,156
+5055,201312,US,United States of America,840
+4459,201312,CN,China,156
+867,201312,NL,Netherlands,528
+857,201312,DE,Germany,276
+354,201312,BR,Brazil,76
+327,201312,FR,France,250
+284,201312,KR,Korea,410
+218,201312,RU,Russian Federation,643
+194,201312,TH,Thailand,764
+185,201312,AU,Australia,36
+5984,201401,US,United States of America,840
+4961,201401,CN,China,156
+1113,201401,NL,Netherlands,528
+1098,201401,DE,Germany,276
+443,201401,FR,France,250
+388,201401,BR,Brazil,76
+326,201401,KR,Korea,410
+280,201401,RU,Russian Federation,643
+233,201401,TH,Thailand,764
+226,201401,GB,United Kingdom of Great Britain & Northern Ireland,156
+6822,201402,US,United States of America,840
+5508,201402,CN,China,156
+1199,201402,DE,Germany,276
+1188,201402,NL,Netherlands,528
+492,201402,FR,France,250
+431,201402,BR,Brazil,76
+379,201402,KR,Korea,410
+316,201402,RU,Russian Federation,643
+269,201402,GB,United Kingdom of Great Britain & Northern Ireland,156
+267,201402,TH,Thailand,764
+7326,201403,US,United States of America,840
+5964,201403,CN,China,156
+1261,201403,DE,Germany,276
+1222,201403,NL,Netherlands,528
+508,201403,FR,France,250
+449,201403,BR,Brazil,76
+405,201403,KR,Korea,410
+370,201403,RU,Russian Federation,643
+335,201403,GB,United Kingdom of Great Britain & Northern Ireland,156
+299,201403,AU,Australia,36
+8983,201404,US,United States of America,840
+6198,201404,CN,China,156
+1328,201404,NL,Netherlands,528
+1318,201404,DE,Germany,276
+521,201404,FR,France,250
+497,201404,BR,Brazil,76
+477,201404,KR,Korea,410
+428,201404,RU,Russian Federation,643
+413,201404,GB,United Kingdom of Great Britain & Northern Ireland,156
+321,201404,TH,Thailand,764
+10631,201405,US,United States of America,840
+6542,201405,CN,China,156
+1464,201405,NL,Netherlands,528
+1430,201405,DE,Germany,276
+546,201405,FR,France,250
+530,201405,BR,Brazil,76
+502,201405,KR,Korea,410
+488,201405,GB,United Kingdom of Great Britain & Northern Ireland,156
+467,201405,RU,Russian Federation,643
+354,201405,TH,Thailand,764
+11009,201406,US,United States of America,840
+6769,201406,CN,China,156
+1580,201406,NL,Netherlands,528
+1480,201406,DE,Germany,276
+594,201406,BR,Brazil,76
+567,201406,FR,France,250
+529,201406,GB,United Kingdom of Great Britain & Northern Ireland,156
+517,201406,KR,Korea,410
+485,201406,RU,Russian Federation,643
+378,201406,TH,Thailand,764
+11424,201407,US,United States of America,840
+6972,201407,CN,China,156
+1723,201407,NL,Netherlands,528
+1553,201407,DE,Germany,276
+654,201407,BR,Brazil,76
+593,201407,GB,United Kingdom of Great Britain & Northern Ireland,156
+583,201407,FR,France,250
+546,201407,KR,Korea,410
+502,201407,RU,Russian Federation,643
+398,201407,TH,Thailand,764
+12081,201408,US,United States of America,840
+7310,201408,CN,China,156
+1810,201408,NL,Netherlands,528
+1638,201408,DE,Germany,276
+745,201408,BR,Brazil,76
+618,201408,FR,France,250
+617,201408,GB,United Kingdom of Great Britain & Northern Ireland,156
+582,201408,KR,Korea,410
+550,201408,RU,Russian Federation,643
+476,201408,AU,Australia,36
+0,201409,US,China,156
+0,201410,US,China,156
+0,201411,US,China,156
+0,201412,US,China,156
