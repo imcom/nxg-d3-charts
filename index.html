@@ -629,22 +629,22 @@
                     <div class="world-head-title world-globe-title">Source</div>
                     <div class="toggle-globe-table" id="toggle-globe-src"><a href="javascript:"></a></div>
                     <script type="text/javascript">
-                    $("#toggle-globe").on("click", function(evt) {
-                        var status = $(evt.target).attr("toggle");
-                        if (status) {
-                            $(evt.target).removeAttr("toggle");
-                            $(".world-bottom-center-left").show();
-                            $(".world-bottom-center-right").show();
-                            $(".world-bottom-center").css("height", 300);
-                            $("#geo-threats").hide();
-                        } else {
-                            $(".world-bottom-center-left").hide();
-                            $(".world-bottom-center-right").hide();
-                            $("#geo-threats").show();
-                            $(".world-bottom-center").css("height", 40);
-                            $(evt.target).attr("toggle", true);
-                        }
-                    });
+                        $("#toggle-globe").on("click", function(evt) {
+                            var status = $(evt.target).attr("toggle");
+                            if (status) {
+                                $(evt.target).removeAttr("toggle");
+                                $(".world-bottom-center-left").show();
+                                $(".world-bottom-center-right").show();
+                                $(".world-bottom-center").css("height", 300);
+                                $("#geo-threats").hide();
+                            } else {
+                                $(".world-bottom-center-left").hide();
+                                $(".world-bottom-center-right").hide();
+                                $("#geo-threats").show();
+                                $(".world-bottom-center").css("height", 40);
+                                $(evt.target).attr("toggle", true);
+                            }
+                        });
                         var globe_src = {};
                         (function(globe_src) {
                             globe_src.clear = function() {

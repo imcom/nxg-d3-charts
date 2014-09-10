@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/d3/d3.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/topojson/topojson.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../lib/d3.geo.projection.min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../lib/d3.geo.zoom.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/underscore/underscore-min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/queue-async/queue.min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+        .land {
+            fill: #A98B6F;
+            stroke: #FFF;
+            stroke-width: 0.7px;
+        }
+    </style>
+    <body>
+    </body>
+    <script type="text/javascript">
+        var globe_projection = {};
+        (function(globe_projection) {
+            globe_projection.clear = function() {
+                $('body').find("canvas").remove();
+                return true;
+            };
+
+            globe_projection.render = function(data) {
+                var width = window.innerHeight,
+                        height = window.innerWidth,
+                        velocity = .01,
+                        then = Date.now();
+
+                var projection = d3.geo.orthographic()
+                        .scale(width / 3)
+                        .translate([300, 300])
+                        .clipAngle(90);
+
+                var canvas = d3.select('body')
+                        .append("canvas")
+                        .attr("width", width)
+                        .style("opacity", .8)
+                        .attr("height", height);
+
+                var context = canvas.node().getContext("2d");
+
+                var path = d3.geo.path().projection(projection).context(context);
+
+                queue()
+                    .defer(d3.json, "../lib/world-110m.json")
+                    .defer(d3.tsv, "../lib/world-110m-country-names.tsv")
+                    .await(ready);
+
+                function ready(error, world, countryData) {
+                    var countryById = {},
+                        countries = topojson.feature(world, world.objects.countries);
+
+                    countryData.forEach(function (d) {
+                        countryById[d.id] = d.name;
+                    });
+
+                    var fill_data = _.map(data, function(d) { return parseInt(d.id); });
+
+                    d3.timer(function () {
+                        var angle = velocity * (Date.now() - then);
+                        projection.rotate([-angle, 0, 0]);
+                        // Update sphere styles
+                        context.beginPath();
+                        path({type: "Sphere"});
+                        context.fillStyle = "#2D1306";
+                        context.fill();
+                        context.strokeStyle = "#2D1306";
+                        context.stroke();
+
+                        _.each(countries.features, function (country) {
+                            context.beginPath();
+                            path(country);
+                            if (_.indexOf(fill_data, country.id) != -1) {
+                                context.fillStyle = "#ff5500";
+                            } else {
+                                context.fillStyle = "#2D1306";
+                            }
+                            context.fill();
+                            context.strokeStyle = "#ff9900";
+                            context.stroke();
+                        });
+                    });
+                }
+            };
+        })(globe_projection);
+
+        queue().defer(d3.csv, "../output/top_source.csv").await(function(err, data) {
+            globe_projection.clear();
+            globe_projection.render(data.slice(22, 32));
+        });
+    </script>
+</html>
