@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/d3/d3.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/topojson/topojson.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../lib/d3.geo.projection.min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../lib/d3.geo.zoom.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/underscore/underscore-min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/queue-async/queue.min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+        html, body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            background: #0A0501;
+            font: 10px sans-serif;
+        }
+
+        .arc path {
+           stroke: #000000;
+        }
+
+        .attack-type-desc{
+            position: absolute;
+            text-align: center;
+            line-height: 200px;
+            color: #fff;
+            width: 100%;
+            z-index: -1;
+        }
+    </style>
+    <body>
+        <div class="attack-type-desc" id="vol-attack-desc"></div>
+    </body>
+
+    <script type="text/javascript">
+        var donut_canvas = {};
+        (function(donut_canvas){
+            donut_canvas.clear = function() {
+                $("body").find("svg").remove();
+                return true;
+            };
+
+            donut_canvas.render = function(data) {
+                var width = 400,
+                        height = 300,
+                        radius = 100,
+                        innerRadius = radius - 2,
+                        outerRadius = radius - 45;
+
+                var color = d3.scale.ordinal()
+                        .range(["#ff7300", "#db5f03", "#8e4000", "#7e3900", "#5e2a00", "#411e00", "#2a1200"]);
+
+                var arc = d3.svg.arc();
+
+                var pie = d3.layout.pie()
+                        .sort(null)
+                        .value(function (d) {
+                            return d.count;
+                        });
+
+                var pie1 = d3.layout.pie()
+                        .sort(null)
+                        .value(function (d, i) {
+                            return d.count;
+                        });
+
+                var svg = d3.select("body").append("svg")
+                        .attr("width", width)
+                        .attr("height", height)
+                        .append("g")
+                        .attr("id", "volumetric")
+                        .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
+
+                function arcs(data) {
+                    var arcs = pie(data),
+                            i = 0,
+                            arc, arc_t;
+
+                    while (i < arcs.length) {
+                        arc = arcs[i];
+                        arc_t = _.clone(arc);
+                        arc.innerRadius = innerRadius;
+                        arc.outerRadius = outerRadius;
+                        arc_t.outerRadius = outerRadius;
+                        arc_t.innerRadius = innerRadius + 20;
+                        if (arc_t.data.sub === "None") {
+                            arc_t.desc = arc.data.type;
+                            arc.next = [arc_t];
+                        } else {
+                            var sub_classes = arc_t.data.sub.split(";");
+                            var sub_cls_stats = _.map(sub_classes, function (sub_class) {
+                                return sub_class.split(":");
+                            });
+                            var total = _.reduce(sub_cls_stats, function (memo, stat) {
+                                return memo + parseInt(stat[1], 10)
+                            }, 0);
+                            var angle_step = (arc_t.endAngle - arc_t.startAngle) / total;
+                            arc_t.endAngle = angle_step * parseInt(sub_cls_stats[0][1], 10) + arc_t.startAngle;
+                            arc_t.desc = sub_cls_stats[0][0];
+                            arc.next = [arc_t];
+                            var previous_arc = _.clone(arc_t);
+                            _.each(sub_cls_stats.slice(1), function (stat) {
+                                var _arc = _.clone(arc_t);
+                                _arc.startAngle = previous_arc.endAngle;
+                                _arc.endAngle = angle_step * parseInt(stat[1], 10) + _arc.startAngle;
+                                _arc.desc = stat[0];
+                                arc.next.push(_arc);
+                                previous_arc = _.clone(_arc);
+                            });
+                        }
+                        i++;
+                    }
+                    return arcs;
+                }
+
+                    var g = svg.selectAll(".arc")
+                            .data(arcs(data))
+                            .enter().append("g")
+                            .attr("class", "arc").on("mouseover", function (d, i) {
+                                d3.selectAll("path[origin-app]").transition().duration(1000).style("opacity", 0.2);
+                                d3.selectAll("text.donut-app").transition().duration(500).style("opacity", 1);
+                                var path_on_hover = d3.selectAll("path[origin-app]")[0][i];
+                                d3.select(d3.selectAll("text.donut-app")[0][i]).transition().style("opacity", 0);
+                                d3.select(path_on_hover).transition().style("opacity", 0);
+                                var _g = d3.select(path_on_hover)[0][0].parentNode;
+                                $("#vol-attack-desc").html(d.data.type);
+                                if (d.next) {
+                                    d3.select(_g).selectAll("path[detail-app=v" + i + "]").data(d.next)
+                                            .enter().append("path").attr("detail-app", "v" + i)
+                                            .style("fill", "#ff7300")
+                                            .style("opacity",.8).attr("d", arc)
+                                            .on("mouseover", function () {
+                                                d3.select(_g).selectAll("text[text-app=v" + i + "]")
+                                                        .attr("text-app", "v" + i)
+                                                        .data(d.next).enter()
+                                                        .append("text").attr("text-app", "v" + i)
+                                                        .attr("transform", function (d) {
+                                                            return "translate(" + arc.centroid(d) + ")";
+                                                        })
+                                                        .style("opacity", 1)
+                                                        .attr("dy", ".35em").style("text-anchor", "middle").attr("stroke", "#ffffff")
+                                                        .text(function (d) {
+                                                            return d.desc;
+                                                        })
+                                                        .on("mouseover", function () {
+                                                            d3.selectAll("path[detail-app=v" + i + "]").transition().duration(500).style("opacity",.8);
+                                                            d3.selectAll("text[text-app=v" + i + "]").transition().duration(500).style("opacity", 1);
+                                                        });
+                                                d3.selectAll("path[detail-app=v" + i + "]").transition().duration(500).style("opacity",.8);
+                                            })
+                                            .on("mouseout", function () {
+                                                d3.selectAll("path[detail-app=v" + i + "]").transition().duration(500).style("opacity", 0);
+                                            });
+
+                                    d3.selectAll("text[text-app=v" + i + "]").transition().duration(500).style("opacity", 1);
+                                } else {
+                                    d3.select(d3.selectAll("text.donut-app")[0][i]).transition().style("opacity", 1);
+                                    d3.select(path_on_hover).transition().style("opacity", .5);
+                                }
+                            }).on("mouseout", function (d, i) {
+                                d3.selectAll("path[origin-app]").transition().duration(500).style("opacity", 1);
+                                d3.selectAll("path[detail-app]").transition().duration(500).style("opacity", 0);
+                                d3.selectAll("text.donut-app").transition().duration(500).style("opacity", 0);
+                                d3.selectAll("text[text-app]").transition().duration(500).style("opacity", 0);
+                                $("#vol-attack-desc").html("");
+                            });
+
+                    var total = 0;
+                    _.each(data, function(d) {
+                        total += d.count;
+                    });
+                    g.append("path").attr("origin-app", true)
+                            .attr("d", arc)
+                            .style("fill", function (d) {
+                                return color(d.data.count / total);
+                            });
+
+                    g.append("text")
+                            .attr("class", "donut-app")
+                            .attr("transform", function (d) {
+                                return "translate(" + arc.centroid(d) + ")";
+                            })
+                            .attr("dy", ".35em")
+                            .style("text-anchor", "middle")
+                            .style("opacity", 0)
+                            .attr("stroke", "#ffffff")
+                            .text(function (d) {
+                                return d.data.type;
+                            });
+            }
+        })(donut_canvas);
+
+        queue().defer(d3.csv, "../output/top_attacktype_Vol.csv").await(function(err, data) {
+            donut_canvas.clear();
+            donut_canvas.render(data.slice(72, 75));
+        });
+    </script>
+</html>
