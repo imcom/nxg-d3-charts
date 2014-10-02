@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/d3/d3.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/topojson/topojson.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../lib/d3.geo.projection.min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../lib/d3.geo.zoom.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/underscore/underscore-min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/queue-async/queue.min.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+        html, body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            background: #0A0501;
+            font: 10px sans-serif;
+        }
+
+        .bar {
+            fill: #ffa364;
+        }
+
+        .axis {
+            font: 10px monospace;
+            stroke: #ffa364;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #ffa364;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+    </style>
+    <body>
+        <div class="timeline-bar-demo"></div>
+    </body>
+    <script type="text/javascript">
+        var timeline_vis = {};
+        var month_in_turn = 0;
+        var months = [];
+        var bars = undefined;
+        var y = undefined;
+        (function(timeline_vis) {
+            timeline_vis.clear = function() {
+                $(".timeline-bar-demo").find("svg").remove();
+                months = [];
+                return true;
+            }
+
+            timeline_vis.load = function(data) {
+                var margin = {top: 30, right: 5, bottom: 0, left: 5},
+                    width = 400,
+                    height = 300;
+
+                var x = d3.scale.ordinal()
+                    .rangeRoundBands([0, width], .1);
+
+                y = d3.scale.sqrt()
+                    .range([height - 20, 0]);
+
+                var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    .tickSize(0)
+                    .tickFormat(function(d, i) { if (i % 4 == 0 && i < 48) return d.substr(0, 3); });
+
+                var svg = d3.select(".timeline-bar-demo").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + ",-" + 10 + ")");
+
+                bars = svg.append("svg").attr("width", width).attr("height", height);
+                x.domain(data.map(function (d) {
+                    return d.week;
+                }));
+                y.domain([0, d3.max(data, function (d) {
+                    return +d.count;
+                })]);
+
+                svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+                bars = bars.selectAll(".bar")
+                        .data(data)
+                        .enter().append("rect")
+                        .attr("class", "bar")
+                        .attr("x", function (d) {
+                            months.push(d.week.substr(0, 7));
+                            return x(d.week);
+                        })
+                        .attr("month", function (d) {
+                            return d.week.substr(0, 7);
+                        })
+                        .attr("width", x.rangeBand() * 0.4)
+                        .attr("y", height)
+                        .attr("height", function (d) {
+                            return height - y(d.count);
+                        });
+
+                months = _.uniq(months);
+            };
+
+            timeline_vis.renderByMonth = function() {
+                var current_month = months[month_in_turn % 12];
+                bars.filter(function(d) { return d.week.substr(0, 7) == current_month; })
+                      .transition()
+                      .duration(1000).ease("linear")
+                      .attr("y", function(d) { return y(d.count); });
+                month_in_turn ++;
+                return month_in_turn == 12 ? 1 : month_in_turn == 24 ? 2 : 0;
+            }
+        })(timeline_vis);
+
+        queue().defer(d3.csv, "../output/top_trend.csv").await(function(err, data) {
+            timeline_vis.clear();
+            timeline_vis.load(data.slice(0, 48));
+            var next_month = false;
+            var timeline_worker = setInterval(function() {
+                if (next_month) {
+                    timeline_vis.clear() && timeline_vis.load(data.slice(48, 96));
+                    next_month = false;
+                }
+                var signal = timeline_vis.renderByMonth();
+                if (signal == 2) clearInterval(timeline_worker);
+                if (signal == 1) next_month = true;
+            }, 1000);
+        });
+    </script>
+</html>
